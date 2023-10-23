@@ -1,43 +1,41 @@
-const qrText=document.getElementById('qr-text');
+const qrText = document.getElementById('qr-text');
 const sizes = document.getElementById('sizes');
 const generateBtn = document.getElementById('generateBtn');
 const downloadBtn = document.getElementById('downloadBtn');
-const qrContainer = document.querySelector('qr-body');
+const qrContainer = document.querySelector('.qr-body');
 
-
-///QR OLUŞTUR
-let size=sizes.value;
-generateBtn.addEventListener('click' ,(e)=>{
+let size = sizes.value;
+generateBtn.addEventListener('click',(e)=>{
     e.preventDefault();
-   isEmptyInput();
+    isEmptyInput();
 });
 
-//SIZE AL
-sizes.addEventListener('change', (e)=>{
+sizes.addEventListener('change',(e)=>{
     size = e.target.value;
     isEmptyInput();
 });
 
-
-
-// INDIME BUTONU EVENT
-downloadBtn.addEventListener('click',()=>{
+downloadBtn.addEventListener('click', ()=>{
     let img = document.querySelector('.qr-body img');
 
-    if (img!== null){
-        let imgAttr = img.getAttribute('src');
-        downloadBtn.setAttribute("href", imgAttr)
-    }else{
-        downloadBtn.setAttribute("href",
-        `${document.querySelector('canvas').toDataURL()}`);
+    if(img !== null){
+        let imgAtrr = img.getAttribute('src');
+        downloadBtn.setAttribute("href", imgAtrr);
+    }
+    else{
+        downloadBtn.setAttribute("href", `${document.querySelector('canvas').toDataURL()}`);
     }
 });
+
 function isEmptyInput(){
-    qrText.value.length > 0 ? generateQRCode() : alert("Please Enter Text Or URL");;
+    // if(qrText.value.length > 0){
+    //     generateQRCode();
+    // }
+    // else{
+    //     alert("Enter the text or URL to generate your QR code");
+    // }
+    qrText.value.length > 0 ? generateQRCode() : alert("Enter the text or URL to generate your QR code");;
 }
-
-
-//SIZE GORE QR OLUSTUR
 function generateQRCode(){
     qrContainer.innerHTML = "";
     new QRCode(qrContainer, {
@@ -46,9 +44,6 @@ function generateQRCode(){
         width:size,
         colorLight:"#fff",
         colorDark:"#000",
-        
     });
-   
 }
-
 
